@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Notices</title>
+    <style>
+        body { font-family: sans-serif; }
+        ul { list-style: none; padding: 0; }
+        li { border: 1px solid #ccc; margin-bottom: 10px; padding: 15px; }
+        h2 { margin-top: 0; }
+        small { color: #555; }
+        .actions a { margin-right: 10px; text-decoration: none; }
+        .actions a.delete { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Notices</h1>
+    <p><a href="/notices/create/">Create New Notice</a></p>
+    <ul>
+        {% for notice in notices %}
+            <li>
+                <h2>{{ notice.title }}</h2>
+                <p>{{ notice.content }}</p>
+                <small>Posted on: {{ notice.created_at.strftime('%Y-%m-%d %H:%M') }}</small>
+                <div class="actions">
+                    <a href="/notices/edit/{{ notice.id }}">Edit</a>
+                    <a href="/notices/delete/{{ notice.id }}" class="delete" onclick="return confirm('Are you sure you want to delete this notice?');">Delete</a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
